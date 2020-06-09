@@ -1,9 +1,18 @@
-var http = require('http');
-var server = http.createServer(function(req, res) {
-    res.writeHead(200, {'Content-Type': 'text/plain'});
-    var message = 'It works!\n',
-        version = 'NodeJS ' + process.versions.node + '\n',
-        response = [message, version].join('\n');
-    res.end(response);
+'use strict';
+
+const express = require('express');
+const helmet = require('helmet');
+
+// Constants
+const PORT = 5000;
+const HOST = '0.0.0.0';
+
+// App
+const app = express();
+app.use(helmet());
+app.get('/', (req, res) => {
+  res.send('Hello World');
 });
-server.listen();
+
+app.listen();
+// console.log(`Running on http://${HOST}:${PORT}`);
